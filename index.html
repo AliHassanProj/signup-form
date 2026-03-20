@@ -1,504 +1,701 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sign Up</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <title>Sign Up — Members</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --ink: #0f0e0d;
-      --cream: #f5f0e8;
-      --gold: #c9a84c;
-      --gold-light: #e8c97a;
-      --rust: #b85c38;
-      --dark-surface: #1a1814;
-      --card-bg: #ffffff;
-      --shadow: 0 20px 60px rgba(0,0,0,0.12);
+      --bg:        #0c0b0a;
+      --surface:   #141210;
+      --card:      #1a1714;
+      --border:    rgba(212,185,120,0.15);
+      --gold:      #d4b978;
+      --gold-dim:  rgba(212,185,120,0.5);
+      --gold-glow: rgba(212,185,120,0.08);
+      --text:      #e8e0d0;
+      --muted:     #7a7060;
+      --danger:    #c0624a;
+      --radius:    6px;
     }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      font-family: 'DM Sans', sans-serif;
-      background-color: var(--cream);
-      background-image:
-        radial-gradient(circle at 20% 20%, rgba(201,168,76,0.08) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(184,92,56,0.06) 0%, transparent 50%);
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
       min-height: 100vh;
-      padding: 3rem 1rem;
-      color: var(--ink);
+      padding: 0 0 6rem;
     }
-    .page-header { text-align: center; margin-bottom: 3rem; }
-    .page-header .eyebrow {
-      font-weight: 500; font-size: 0.7rem; letter-spacing: 0.3em;
-      text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem;
+
+    /* ── Hero header ── */
+    .hero {
+      text-align: center;
+      padding: 5rem 1rem 4rem;
+      position: relative;
+      overflow: hidden;
     }
-    .page-header h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700;
-      color: var(--ink); line-height: 1.1;
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 50% 0%, rgba(212,185,120,0.07) 0%, transparent 70%);
+      pointer-events: none;
     }
-    .page-header .divider {
-      display: flex; align-items: center; justify-content: center;
-      gap: 0.75rem; margin-top: 1rem;
+    .hero-label {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--border);
+      padding: 0.35rem 1rem;
+      border-radius: 999px;
+      margin-bottom: 1.5rem;
     }
-    .page-header .divider span {
-      display: block; width: 48px; height: 1px;
-      background: var(--gold); opacity: 0.6;
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      background: linear-gradient(135deg, #f0e8d0 0%, var(--gold) 50%, #c8a855 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
     }
-    .form-card {
-      background: var(--card-bg); border-radius: 2px;
-      box-shadow: var(--shadow), inset 0 0 0 1px rgba(201,168,76,0.15);
-      padding: 2.5rem 2.5rem 2rem; position: relative; overflow: hidden;
+    .hero p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      font-weight: 300;
+      max-width: 360px;
+      margin: 0 auto;
+      line-height: 1.6;
     }
-    .form-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-      background: linear-gradient(90deg, var(--gold), var(--rust), var(--gold));
+
+    /* ── Layout ── */
+    .page-wrap { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ── Form section ── */
+    .form-wrap {
+      max-width: 560px;
+      margin: 0 auto 5rem;
     }
-    .form-floating label { font-size: 0.82rem; font-weight: 500; color: #888; }
-    .form-floating > .form-control,
-    .form-floating > textarea {
-      border: 1px solid #e0d9cf; border-radius: 2px; background: #fdfcfa;
-      font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--ink);
+    .glass-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .section-label {
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .field { margin-bottom: 1rem; }
+    .field label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.04em;
+    }
+    .field input,
+    .field textarea {
+      width: 100%;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--text);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.9rem;
+      padding: 0.75rem 1rem;
+      outline: none;
       transition: border-color 0.2s, box-shadow 0.2s;
     }
-    .form-floating > .form-control:focus,
-    .form-floating > textarea:focus {
-      border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,0.12); background: #fff;
+    .field input:focus,
+    .field textarea:focus {
+      border-color: var(--gold-dim);
+      box-shadow: 0 0 0 3px var(--gold-glow);
     }
-    textarea.form-control { resize: none; }
+    .field input.error { border-color: var(--danger); }
+    .field textarea { resize: none; height: 90px; }
+    .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    /* Upload */
     .upload-zone {
-      border: 1.5px dashed #d4c9b5; border-radius: 2px; background: #fdfcfa;
-      padding: 1.5rem; text-align: center; cursor: pointer;
-      transition: border-color 0.2s, background 0.2s; position: relative;
+      border: 1.5px dashed rgba(212,185,120,0.25);
+      border-radius: 4px;
+      background: var(--card);
+      padding: 1.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      position: relative;
+      margin-bottom: 1.5rem;
     }
-    .upload-zone:hover { border-color: var(--gold); background: #fffef9; }
+    .upload-zone:hover { border-color: var(--gold-dim); background: #1f1c18; }
     .upload-zone input[type="file"] {
       position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
     }
-    .upload-zone .upload-icon { font-size: 1.8rem; margin-bottom: 0.4rem; display: block; }
-    .upload-zone .upload-text { font-size: 0.82rem; color: #888; }
-    .upload-zone .upload-text strong { color: var(--gold); font-weight: 600; }
+    .upload-icon { font-size: 1.6rem; display: block; margin-bottom: 0.35rem; }
+    .upload-text { font-size: 0.78rem; color: var(--muted); }
+    .upload-text strong { color: var(--gold); font-weight: 500; }
     #preview-thumb {
-      width: 72px; height: 72px; border-radius: 50%; object-fit: cover;
-      border: 2px solid var(--gold); display: none; margin: 0.75rem auto 0;
-    }
-    .upload-progress {
-      height: 3px; background: rgba(201,168,76,0.2); border-radius: 2px;
-      margin-top: 0.75rem; overflow: hidden; display: none;
-    }
-    .upload-progress-bar {
-      height: 100%; background: var(--gold);
-      animation: progressAnim 1.5s ease-in-out infinite;
-    }
-    @keyframes progressAnim {
-      0% { width: 0%; } 50% { width: 70%; } 100% { width: 100%; }
-    }
-    .btn-submit {
-      background: var(--ink); color: var(--cream); border: none; border-radius: 2px;
-      font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 0.85rem;
-      letter-spacing: 0.15em; text-transform: uppercase; padding: 0.85rem 2rem;
-      width: 100%; position: relative; overflow: hidden;
-      transition: background 0.25s, transform 0.1s;
-    }
-    .btn-submit:hover { background: #2a2620; transform: translateY(-1px); }
-    .btn-submit:active { transform: translateY(0); }
-    .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-    .field-group-label {
-      font-size: 0.65rem; font-weight: 600; letter-spacing: 0.25em;
-      text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem; display: block;
+      width: 64px; height: 64px; border-radius: 50%; object-fit: cover;
+      border: 2px solid var(--gold); display: none; margin: 0.6rem auto 0;
     }
 
-    /* Toast */
-    .toast-wrap { position: fixed; top: 1.5rem; right: 1.5rem; z-index: 9999; display: flex; flex-direction: column; gap: 0.5rem; }
-    .toast-msg {
-      padding: 0.85rem 1.25rem; border-radius: 2px; font-size: 0.85rem; font-weight: 500;
-      display: flex; align-items: center; gap: 0.6rem;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.15); animation: slideIn 0.3s ease both; min-width: 260px;
+    /* Button */
+    .btn-primary {
+      width: 100%;
+      background: var(--gold);
+      color: #0c0b0a;
+      border: none;
+      border-radius: 4px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.9rem;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
     }
-    .toast-msg.success { background: #1a1814; color: var(--gold-light); border-left: 3px solid var(--gold); }
-    .toast-msg.error   { background: #1a1814; color: #f08080; border-left: 3px solid #b85c38; }
-    .toast-msg.loading { background: #1a1814; color: #c8bfaf; border-left: 3px solid #888; }
-    @keyframes slideIn { from { opacity:0; transform:translateX(20px); } to { opacity:1; transform:translateX(0); } }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-primary:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
 
-    /* All Signups */
-    #all-signups { margin-top: 2rem; }
-    .signups-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
-    .signups-header .section-title {
-      font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--ink);
-      position: relative; padding-bottom: 0.6rem;
+    /* ── Members section ── */
+    .members-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
     }
-    .signups-header .section-title::after {
-      content: ''; position: absolute; bottom: 0; left: 0; width: 40px; height: 2px; background: var(--gold);
+    .members-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--text);
     }
-    .signups-count {
-      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
-      color: var(--gold); background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.25);
-      padding: 0.3rem 0.75rem; border-radius: 1px;
+    .members-title span { color: var(--gold); }
+    .members-controls { display: flex; gap: 0.5rem; align-items: center; }
+    .pill-count {
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--gold);
+      background: var(--gold-glow); border: 1px solid var(--border);
+      padding: 0.3rem 0.8rem; border-radius: 999px;
+    }
+    .btn-icon {
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--muted); border-radius: 4px;
+      font-size: 0.75rem; font-weight: 500;
+      padding: 0.35rem 0.75rem; cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-icon:hover { color: var(--gold); border-color: var(--gold-dim); }
+
+    /* ── Grid ── */
+    .members-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
     }
 
-    /* Profile Card */
-    .profile-card {
-      background: var(--dark-surface); border-radius: 2px; overflow: hidden;
-      box-shadow: var(--shadow); animation: cardReveal 0.5s cubic-bezier(0.22,1,0.36,1) both; margin-bottom: 1.25rem;
+    /* ── Member card ── */
+    .member-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: border-color 0.25s, transform 0.25s;
+      animation: fadeUp 0.4s ease both;
     }
-    @keyframes cardReveal { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
-    .profile-card .card-banner {
-      height: 70px;
-      background: linear-gradient(135deg, #1a1410 0%, #2e2418 50%, #1a1410 100%);
+    .member-card:hover {
+      border-color: rgba(212,185,120,0.35);
+      transform: translateY(-3px);
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-top {
+      height: 56px;
+      background: linear-gradient(135deg, #1f1a12 0%, #2a2215 100%);
       position: relative;
     }
-    .profile-card .card-banner::after {
-      content: ''; position: absolute; inset: 0;
-      background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(201,168,76,0.04) 10px, rgba(201,168,76,0.04) 11px);
+    .card-top::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(
+        45deg, transparent, transparent 8px,
+        rgba(212,185,120,0.03) 8px, rgba(212,185,120,0.03) 9px
+      );
     }
-    .profile-card .avatar-wrap {
-      width: 74px; height: 74px; border-radius: 50%; border: 3px solid var(--gold); overflow: hidden;
-      position: absolute; bottom: -37px; left: 1.5rem; background: #2a2620;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.4); z-index: 1;
+    .card-avatar {
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      border: 2.5px solid var(--gold);
+      overflow: hidden;
+      position: absolute;
+      bottom: -30px; left: 1.25rem;
+      background: #2a2215;
+      z-index: 1;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.5);
     }
-    .profile-card .avatar-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .profile-card .avatar-placeholder {
-      width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
-      font-family: 'Playfair Display', serif; font-size: 1.7rem; color: var(--gold); background: #2a2620;
+    .card-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .card-avatar-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 600;
+      color: var(--gold);
     }
-    .profile-card .card-body { padding: 3rem 1.5rem 1.5rem; color: #f0ece4; }
-    .profile-card .card-name {
-      font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700;
-      color: #f5f0e8; margin-bottom: 0.15rem;
-    }
-    .profile-card .card-email { font-size: 0.78rem; color: var(--gold-light); letter-spacing: 0.03em; margin-bottom: 1.2rem; }
-    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
-    .info-label { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.15rem; }
-    .info-value { font-size: 0.85rem; color: #c8bfaf; font-weight: 300; line-height: 1.4; }
-    .info-value.empty { color: #5a5248; font-style: italic; }
-    .card-footer-bar {
-      border-top: 1px solid rgba(255,255,255,0.06); padding: 0.85rem 1.5rem;
-      display: flex; align-items: center; gap: 0.5rem;
-    }
-    .badge-registered {
-      font-size: 0.62rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
-      background: rgba(201,168,76,0.15); color: var(--gold-light); border: 1px solid rgba(201,168,76,0.3);
-      padding: 0.2rem 0.55rem; border-radius: 1px;
-    }
-    .timestamp { font-size: 0.68rem; color: #5a5248; margin-left: auto; }
 
-    /* States */
-    .empty-state { text-align: center; padding: 3rem 1rem; color: #b0a898; }
-    .empty-state .empty-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
-    .empty-state p { font-size: 0.85rem; }
-    .loading-state { text-align: center; padding: 2.5rem 1rem; color: #b0a898; font-size: 0.85rem; }
+    .card-body { padding: 2.2rem 1.25rem 1.25rem; }
+    .card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem; font-weight: 600;
+      color: var(--text); margin-bottom: 0.1rem;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .card-email {
+      font-size: 0.72rem; color: var(--gold-dim);
+      margin-bottom: 1rem;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .card-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+    .meta-item {}
+    .meta-label {
+      font-size: 0.55rem; font-weight: 600; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 0.15rem;
+    }
+    .meta-value {
+      font-size: 0.8rem; color: #a09880; font-weight: 300; line-height: 1.3;
+      word-break: break-word;
+    }
+    .meta-value.empty { color: #3a3530; font-style: italic; }
+
+    .card-footer {
+      border-top: 1px solid var(--border);
+      padding: 0.7rem 1.25rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .badge {
+      font-size: 0.58rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--gold); background: var(--gold-glow);
+      border: 1px solid var(--border); padding: 0.2rem 0.5rem; border-radius: 999px;
+    }
+    .card-time { font-size: 0.65rem; color: var(--muted); }
+
+    /* ── Pagination ── */
+    .pagination {
+      display: flex; align-items: center; justify-content: center;
+      gap: 0.4rem; flex-wrap: wrap;
+    }
+    .page-btn {
+      min-width: 36px; height: 36px;
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--muted); border-radius: 4px;
+      font-family: 'Outfit', sans-serif; font-size: 0.8rem; font-weight: 500;
+      cursor: pointer; transition: all 0.2s;
+      display: flex; align-items: center; justify-content: center; padding: 0 0.5rem;
+    }
+    .page-btn:hover:not(:disabled) { border-color: var(--gold-dim); color: var(--gold); }
+    .page-btn.active { background: var(--gold); border-color: var(--gold); color: #0c0b0a; font-weight: 600; }
+    .page-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+    .page-info { font-size: 0.75rem; color: var(--muted); margin: 0 0.5rem; }
+
+    /* ── States ── */
+    .state-box {
+      text-align: center; padding: 4rem 1rem;
+      border: 1px dashed var(--border); border-radius: var(--radius);
+    }
+    .state-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+    .state-text { font-size: 0.85rem; color: var(--muted); }
     .spinner {
-      display: inline-block; width: 18px; height: 18px;
-      border: 2px solid rgba(201,168,76,0.3); border-top-color: var(--gold);
-      border-radius: 50%; animation: spin 0.7s linear infinite;
-      margin-right: 0.5rem; vertical-align: middle;
+      display: inline-block; width: 20px; height: 20px;
+      border: 2px solid var(--border); border-top-color: var(--gold);
+      border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
-    .btn-refresh {
-      background: transparent; border: 1px solid rgba(201,168,76,0.4); color: var(--gold);
-      border-radius: 2px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em;
-      text-transform: uppercase; padding: 0.35rem 0.85rem; cursor: pointer; transition: background 0.2s;
-    }
-    .btn-refresh:hover { background: rgba(201,168,76,0.1); }
 
-    /* Image loading shimmer */
-    .avatar-wrap.loading-img {
-      background: linear-gradient(90deg, #2a2620 25%, #3a3028 50%, #2a2620 75%);
-      background-size: 200% 100%;
-      animation: shimmer 1.5s infinite;
+    /* ── Toast ── */
+    .toast-wrap { position: fixed; top: 1.25rem; right: 1.25rem; z-index: 9999; display: flex; flex-direction: column; gap: 0.5rem; }
+    .toast {
+      padding: 0.8rem 1.1rem; border-radius: 4px; font-size: 0.82rem; font-weight: 500;
+      display: flex; align-items: center; gap: 0.6rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4); animation: toastIn 0.3s ease both; min-width: 240px;
+      border: 1px solid var(--border);
     }
-    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+    .toast.success { background: #1a1a12; color: #d4c878; border-color: rgba(212,200,120,0.3); }
+    .toast.error   { background: #1a1010; color: #d47878; border-color: rgba(212,120,120,0.3); }
+    .toast.loading { background: var(--surface); color: var(--muted); }
+    @keyframes toastIn { from { opacity:0; transform:translateX(16px); } to { opacity:1; transform:translateX(0); } }
+
+    @media (max-width: 540px) {
+      .row-2 { grid-template-columns: 1fr; }
+      .glass-card { padding: 1.5rem; }
+      .members-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
 
 <div class="toast-wrap" id="toast-wrap"></div>
 
-<div class="container" style="max-width:680px;">
+<!-- Hero -->
+<div class="hero">
+  <span class="hero-label">Member Registration</span>
+  <h1>Join Our Community</h1>
+  <p>Fill in your details below to register and join our growing community of members.</p>
+</div>
 
-  <!-- Header -->
-  <div class="page-header">
-    <p class="eyebrow">Create Account</p>
-    <h1>Join Us Today</h1>
-    <div class="divider">
-      <span></span>
-      <svg width="6" height="6" viewBox="0 0 6 6"><rect x="1" y="1" width="4" height="4" fill="#c9a84c" transform="rotate(45 3 3)"/></svg>
-      <span></span>
-    </div>
-  </div>
+<div class="page-wrap">
 
   <!-- Form -->
-  <div class="form-card mb-5">
-    <form id="signup-form" novalidate>
+  <div class="form-wrap">
+    <div class="glass-card">
+      <form id="signup-form" novalidate>
 
-      <span class="field-group-label">Personal Info</span>
-      <div class="row g-3 mb-3">
-        <div class="col-12">
-          <div class="form-floating">
-            <input type="text" class="form-control" id="name" placeholder="Full Name" required/>
+        <span class="section-label">Personal Information</span>
+        <div class="row-2">
+          <div class="field">
             <label for="name">Full Name *</label>
+            <input type="text" id="name" placeholder="John Doe" required/>
           </div>
-        </div>
-        <div class="col-12">
-          <div class="form-floating">
-            <input type="email" class="form-control" id="email" placeholder="Email" required/>
+          <div class="field">
             <label for="email">Email Address *</label>
+            <input type="email" id="email" placeholder="you@example.com" required/>
           </div>
         </div>
-      </div>
 
-      <span class="field-group-label mt-2">Contact</span>
-      <div class="row g-3 mb-3">
-        <div class="col-12">
-          <div class="form-floating">
-            <input type="tel" class="form-control" id="phone" placeholder="Phone"/>
-            <label for="phone">Phone (optional)</label>
+        <span class="section-label" style="margin-top:1.25rem;">Contact Details</span>
+        <div class="row-2">
+          <div class="field">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" placeholder="+92 300 0000000"/>
           </div>
-        </div>
-        <div class="col-12">
-          <div class="form-floating">
-            <textarea class="form-control" id="address" placeholder="Address" style="height:100px"></textarea>
+          <div class="field">
             <label for="address">Address</label>
+            <textarea id="address" placeholder="City, Country"></textarea>
           </div>
         </div>
-      </div>
 
-      <span class="field-group-label mt-2">Profile Photo</span>
-      <div class="upload-zone mb-4" id="upload-zone">
-        <input type="file" id="photo" accept="image/*"/>
-        <span class="upload-icon" id="upload-icon">📷</span>
-        <p class="upload-text mb-0"><strong>Click to upload</strong> or drag & drop<br><span style="font-size:0.75rem;color:#aaa;">PNG, JPG up to 5MB</span></p>
-        <img id="preview-thumb" alt="preview"/>
-        <div class="upload-progress" id="upload-progress">
-          <div class="upload-progress-bar"></div>
+        <span class="section-label" style="margin-top:0.25rem;">Profile Photo</span>
+        <div class="upload-zone" id="upload-zone">
+          <input type="file" id="photo" accept="image/*"/>
+          <span class="upload-icon" id="upload-icon">🖼️</span>
+          <p class="upload-text"><strong>Click to upload</strong> or drag & drop<br>
+          <span style="font-size:0.72rem;opacity:0.6;">PNG, JPG up to 5MB</span></p>
+          <img id="preview-thumb" alt="preview"/>
         </div>
-      </div>
 
-      <button type="submit" class="btn-submit" id="submit-btn">REGISTER NOW</button>
-    </form>
+        <button type="submit" class="btn-primary" id="submit-btn">Register Now</button>
+      </form>
+    </div>
   </div>
 
-  <!-- All Registered Members -->
-  <div id="all-signups">
-    <div class="signups-header">
-      <p class="section-title">Registered Members</p>
-      <div style="display:flex;gap:0.5rem;align-items:center;">
-        <span class="signups-count" id="signups-count">— members</span>
-        <button class="btn-refresh" onclick="loadAllSignups()">↻ Refresh</button>
+  <!-- Members -->
+  <div id="members-section">
+    <div class="members-header">
+      <div>
+        <div class="members-title">Registered <span>Members</span></div>
+      </div>
+      <div class="members-controls">
+        <span class="pill-count" id="pill-count">— members</span>
+        <button class="btn-icon" onclick="loadAllSignups()">↻ Refresh</button>
       </div>
     </div>
+
     <div id="cards-container">
-      <div class="loading-state"><span class="spinner"></span> Loading members…</div>
+      <div class="state-box">
+        <div class="state-icon"><span class="spinner"></span></div>
+        <p class="state-text">Loading members…</p>
+      </div>
     </div>
+
+    <div class="pagination" id="pagination"></div>
   </div>
 
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+  // ══════════════════════════════════════════
+  const SHEET_URL = "https://script.google.com/macros/s/AKfycby1mWYm7Yu6B1JsvqZgqO4sGL5AfT9Xkvw-pBG-USomZ01795K5D2bnUIfmn_fzf9A/exec";
+  const PER_PAGE  = 9; // cards per page
+  // ══════════════════════════════════════════
 
-  // ══════════════════════════════════════════════
-  //  YOUR GOOGLE APPS SCRIPT URL
-  // ══════════════════════════════════════════════
-  const SHEET_URL = "https://script.google.com/macros/s/AKfycbwDwiUwNhbnpEuW-GO7fs0WFgbNFh2upePBKVTRT5PWeQNQk5QV0YPrnpp4kApsE8S6/exec";
+  let allMembers  = [];
+  let currentPage = 1;
 
-  // ── Toast ──
-  function showToast(msg, type = 'success', duration = 4000) {
+  /* ── Toast ── */
+  function toast(msg, type = 'success', ms = 4000) {
     const icons = { success: '✓', error: '✕', loading: '⏳' };
-    const toast = document.createElement('div');
-    toast.className = `toast-msg ${type}`;
-    toast.innerHTML = `<span>${icons[type]}</span> ${msg}`;
-    document.getElementById('toast-wrap').appendChild(toast);
-    if (duration) setTimeout(() => toast.remove(), duration);
-    return toast;
+    const el = document.createElement('div');
+    el.className = `toast ${type}`;
+    el.innerHTML = `<span>${icons[type]}</span>${msg}`;
+    document.getElementById('toast-wrap').appendChild(el);
+    if (ms) setTimeout(() => el.remove(), ms);
+    return el;
   }
 
-  function escHtml(str) {
-    return String(str || '')
-      .replace(/&/g,'&amp;').replace(/</g,'&lt;')
-      .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  function esc(s) {
+    return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
-  // ── Convert file to base64 ──
-  function fileToBase64(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload  = () => resolve(reader.result.split(',')[1]); // strip data:...;base64,
-      reader.onerror = reject;
-      reader.readAsDataURL(file);
-    });
+  /* ── Sanitize phone: strip leading = + - that cause formula errors ── */
+  function cleanPhone(p) {
+    if (!p) return '';
+    // remove any #ERROR! or formula artifacts
+    if (p.includes('#') || p.includes('ERROR')) return '';
+    return p.trim();
   }
 
-  // ── Build profile card ──
-  function buildCard(member, delay = 0) {
-    const initial  = (member.name || '?').charAt(0).toUpperCase();
-    const phone    = member.phone    || '';
-    const address  = member.address  || '';
-    const imageUrl = member.imageUrl || '';
+  /* ── Build one card ── */
+  function buildCard(m, delay) {
+    const initial  = (m.name || '?').charAt(0).toUpperCase();
+    const phone    = cleanPhone(m.phone);
+    const address  = (m.address || '').trim();
+    const imageUrl = (m.imageUrl || '').trim();
 
-    const avatarHtml = imageUrl
-      ? `<img src="${escHtml(imageUrl)}" alt="${escHtml(member.name)}" 
-              onload="this.parentElement.classList.remove('loading-img')"
-              onerror="this.outerHTML='<div class=\\'avatar-placeholder\\'>${initial}</div>'">`
-      : `<div class="avatar-placeholder">${initial}</div>`;
+    const avatarInner = imageUrl
+      ? `<img src="${esc(imageUrl)}" alt="${esc(m.name)}"
+              onerror="this.outerHTML='<div class=\\'card-avatar-placeholder\\'>${initial}</div>'">`
+      : `<div class="card-avatar-placeholder">${initial}</div>`;
 
     const card = document.createElement('div');
-    card.className = 'profile-card';
+    card.className = 'member-card';
     card.style.animationDelay = delay + 'ms';
     card.innerHTML = `
-      <div class="card-banner" style="position:relative;">
-        <div class="avatar-wrap ${imageUrl ? 'loading-img' : ''}">${avatarHtml}</div>
+      <div class="card-top">
+        <div class="card-avatar">${avatarInner}</div>
       </div>
       <div class="card-body">
-        <h2 class="card-name">${escHtml(member.name)}</h2>
-        <p class="card-email">${escHtml(member.email)}</p>
-        <div class="info-grid">
-          <div>
-            <p class="info-label">Phone</p>
-            <p class="info-value ${phone ? '' : 'empty'}">${phone ? escHtml(phone) : '—'}</p>
+        <div class="card-name" title="${esc(m.name)}">${esc(m.name)}</div>
+        <div class="card-email" title="${esc(m.email)}">${esc(m.email)}</div>
+        <div class="card-meta">
+          <div class="meta-item">
+            <div class="meta-label">Phone</div>
+            <div class="meta-value ${phone ? '' : 'empty'}">${phone ? esc(phone) : '—'}</div>
           </div>
-          <div>
-            <p class="info-label">Address</p>
-            <p class="info-value ${address ? '' : 'empty'}">${address ? escHtml(address) : '—'}</p>
+          <div class="meta-item">
+            <div class="meta-label">Location</div>
+            <div class="meta-value ${address ? '' : 'empty'}">${address ? esc(address) : '—'}</div>
           </div>
         </div>
       </div>
-      <div class="card-footer-bar">
-        <span class="badge-registered">✓ Registered</span>
-        <span class="timestamp">${escHtml(member.timestamp)}</span>
+      <div class="card-footer">
+        <span class="badge">✓ Member</span>
+        <span class="card-time">${esc(m.timestamp)}</span>
       </div>`;
     return card;
   }
 
-  // ── Load all members ──
+  /* ── Render current page ── */
+  function renderPage(page) {
+    currentPage = page;
+    const container = document.getElementById('cards-container');
+    const start     = (page - 1) * PER_PAGE;
+    const slice     = allMembers.slice(start, start + PER_PAGE);
+
+    container.innerHTML = '';
+    slice.forEach((m, i) => container.appendChild(buildCard(m, i * 50)));
+    renderPagination();
+    container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  /* ── Pagination UI ── */
+  function renderPagination() {
+    const total = Math.ceil(allMembers.length / PER_PAGE);
+    const pg    = document.getElementById('pagination');
+    pg.innerHTML = '';
+    if (total <= 1) return;
+
+    const prev = document.createElement('button');
+    prev.className = 'page-btn';
+    prev.textContent = '←';
+    prev.disabled = currentPage === 1;
+    prev.onclick = () => renderPage(currentPage - 1);
+    pg.appendChild(prev);
+
+    // Page number buttons — show max 5 around current
+    const range = paginate(currentPage, total);
+    range.forEach(p => {
+      const btn = document.createElement('button');
+      if (p === '…') {
+        btn.className = 'page-btn';
+        btn.textContent = '…';
+        btn.disabled = true;
+      } else {
+        btn.className = 'page-btn' + (p === currentPage ? ' active' : '');
+        btn.textContent = p;
+        btn.onclick = () => renderPage(p);
+      }
+      pg.appendChild(btn);
+    });
+
+    const info = document.createElement('span');
+    info.className = 'page-info';
+    info.textContent = `${currentPage} / ${total}`;
+    pg.appendChild(info);
+
+    const next = document.createElement('button');
+    next.className = 'page-btn';
+    next.textContent = '→';
+    next.disabled = currentPage === total;
+    next.onclick = () => renderPage(currentPage + 1);
+    pg.appendChild(next);
+  }
+
+  function paginate(cur, total) {
+    if (total <= 7) return Array.from({length: total}, (_, i) => i + 1);
+    if (cur <= 4)   return [1,2,3,4,5,'…',total];
+    if (cur >= total - 3) return [1,'…',total-4,total-3,total-2,total-1,total];
+    return [1,'…',cur-1,cur,cur+1,'…',total];
+  }
+
+  /* ── Load from Google Sheets ── */
   async function loadAllSignups() {
     const container = document.getElementById('cards-container');
-    container.innerHTML = '<div class="loading-state"><span class="spinner"></span> Loading members…</div>';
+    container.innerHTML = `<div class="state-box"><div class="state-icon"><span class="spinner"></span></div><p class="state-text">Loading members…</p></div>`;
+    document.getElementById('pagination').innerHTML = '';
+
     try {
       const res  = await fetch(SHEET_URL);
       const json = await res.json();
 
       if (!json.data || json.data.length === 0) {
-        container.innerHTML = `<div class="empty-state"><div class="empty-icon">👥</div><p>No members yet. Be the first to sign up!</p></div>`;
-        document.getElementById('signups-count').textContent = '0 members';
+        container.innerHTML = `<div class="state-box"><div class="state-icon">👥</div><p class="state-text">No members yet — be the first to register!</p></div>`;
+        document.getElementById('pill-count').textContent = '0 members';
         return;
       }
 
-      const members = [...json.data].reverse();
-      container.innerHTML = '';
-      members.forEach((m, i) => container.appendChild(buildCard(m, i * 60)));
-      const c = members.length;
-      document.getElementById('signups-count').textContent = c + (c === 1 ? ' member' : ' members');
+      allMembers = [...json.data].reverse();
+      const c = allMembers.length;
+      document.getElementById('pill-count').textContent = c + (c === 1 ? ' member' : ' members');
+      renderPage(1);
 
-    } catch (err) {
-      container.innerHTML = `<div class="empty-state"><div class="empty-icon">⚠️</div><p>Could not load members. Please redeploy your Apps Script with the new code.</p></div>`;
+    } catch(err) {
+      container.innerHTML = `<div class="state-box"><div class="state-icon">⚠️</div><p class="state-text">Could not load members. Check your Apps Script URL.</p></div>`;
       console.error(err);
     }
   }
 
-  // ── Photo preview ──
-  const photoInput   = document.getElementById('photo');
-  const previewThumb = document.getElementById('preview-thumb');
-
+  /* ── Photo preview ── */
+  const photoInput = document.getElementById('photo');
+  const previewEl  = document.getElementById('preview-thumb');
   photoInput.addEventListener('change', () => {
     const file = photoInput.files[0];
     if (!file) return;
-
-    // Size check (5MB)
     if (file.size > 5 * 1024 * 1024) {
-      showToast('Image too large. Max 5MB allowed.', 'error');
+      toast('Image too large. Max 5MB.', 'error');
       photoInput.value = '';
       return;
     }
-
-    const url = URL.createObjectURL(file);
-    previewThumb.src = url;
-    previewThumb.style.display = 'block';
+    previewEl.src = URL.createObjectURL(file);
+    previewEl.style.display = 'block';
     document.getElementById('upload-icon').style.display = 'none';
   });
 
-  // ── Form submit ──
+  /* ── base64 helper ── */
+  function toBase64(file) {
+    return new Promise((res, rej) => {
+      const r = new FileReader();
+      r.onload  = () => res(r.result.split(',')[1]);
+      r.onerror = rej;
+      r.readAsDataURL(file);
+    });
+  }
+
+  /* ── Submit ── */
   document.getElementById('signup-form').addEventListener('submit', async function(e) {
     e.preventDefault();
-
-    const name    = document.getElementById('name').value.trim();
-    const email   = document.getElementById('email').value.trim();
+    const nameEl  = document.getElementById('name');
+    const emailEl = document.getElementById('email');
+    const name    = nameEl.value.trim();
+    const email   = emailEl.value.trim();
     const phone   = document.getElementById('phone').value.trim();
     const address = document.getElementById('address').value.trim();
     const file    = photoInput.files[0];
     const btn     = document.getElementById('submit-btn');
 
-    if (!name)  document.getElementById('name').classList.add('is-invalid');
-    if (!email) document.getElementById('email').classList.add('is-invalid');
+    nameEl.classList.toggle('error', !name);
+    emailEl.classList.toggle('error', !email);
     if (!name || !email) return;
 
     btn.disabled = true;
-    btn.textContent = 'UPLOADING…';
-
-    const progress = document.getElementById('upload-progress');
-    if (file) progress.style.display = 'block';
-
-    const loadingToast = showToast('Saving your registration…', 'loading', 0);
+    btn.textContent = 'Registering…';
+    const t = toast('Saving your registration…', 'loading', 0);
 
     const timestamp = new Date().toLocaleString('en-US', {
       month:'short', day:'numeric', year:'numeric', hour:'2-digit', minute:'2-digit'
     });
 
-    // Build payload
     const payload = { timestamp, name, email, phone, address };
-
-    // If photo selected, convert to base64
     if (file) {
       try {
-        payload.imageBase64 = await fileToBase64(file);
+        payload.imageBase64 = await toBase64(file);
         payload.imageName   = file.name;
         payload.imageMime   = file.type;
-      } catch (err) {
-        console.warn('Image read failed, skipping photo', err);
-      }
+      } catch(err) { console.warn('Image encode failed', err); }
     }
 
     try {
       await fetch(SHEET_URL, {
-        method: 'POST',
-        mode: 'no-cors',
+        method: 'POST', mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
-
-      loadingToast.remove();
-      progress.style.display = 'none';
-      showToast('✓ Registered successfully! Card will appear below.', 'success');
-
-      // Reset form
+      t.remove();
+      toast('✓ Registered successfully!', 'success');
       this.reset();
-      previewThumb.style.display = 'none';
+      previewEl.style.display = 'none';
       document.getElementById('upload-icon').style.display = 'block';
-
-      // Wait for sheet + Drive to process, then reload
-      setTimeout(() => loadAllSignups(), 3000);
-
-    } catch (err) {
-      loadingToast.remove();
-      progress.style.display = 'none';
-      showToast('Failed to save. Please try again.', 'error');
+      setTimeout(() => loadAllSignups(), 2500);
+    } catch(err) {
+      t.remove();
+      toast('Failed to register. Please try again.', 'error');
       console.error(err);
     }
 
     btn.disabled = false;
-    btn.textContent = 'REGISTER NOW';
+    btn.textContent = 'Register Now';
   });
 
   ['name','email'].forEach(id => {
     document.getElementById(id).addEventListener('input', function() {
-      this.classList.remove('is-invalid');
+      this.classList.remove('error');
     });
   });
 
-  // Load on page start
   loadAllSignups();
-
 </script>
 </body>
 </html>
