@@ -32,7 +32,6 @@
       color: var(--ink);
     }
 
-    /* ── Page header ── */
     .page-header {
       text-align: center;
       margin-bottom: 3rem;
@@ -67,9 +66,7 @@
       background: var(--gold);
       opacity: 0.6;
     }
-    .page-header .divider i { color: var(--gold); font-size: 0.5rem; }
 
-    /* ── Form card ── */
     .form-card {
       background: var(--card-bg);
       border-radius: 2px;
@@ -86,7 +83,6 @@
       background: linear-gradient(90deg, var(--gold), var(--rust), var(--gold));
     }
 
-    /* ── Floating label overrides ── */
     .form-floating label {
       font-size: 0.82rem;
       font-weight: 500;
@@ -112,7 +108,6 @@
     }
     textarea.form-control { resize: none; }
 
-    /* ── File upload zone ── */
     .upload-zone {
       border: 1.5px dashed #d4c9b5;
       border-radius: 2px;
@@ -147,7 +142,6 @@
       margin: 0.5rem auto 0;
     }
 
-    /* ── Submit button ── */
     .btn-submit {
       background: var(--ink);
       color: var(--cream);
@@ -175,8 +169,8 @@
     .btn-submit:hover { background: #2a2620; transform: translateY(-1px); }
     .btn-submit:hover::after { transform: translateX(100%); }
     .btn-submit:active { transform: translateY(0); }
+    .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
-    /* ── Section label ── */
     .field-group-label {
       font-size: 0.65rem;
       font-weight: 600;
@@ -185,6 +179,36 @@
       color: var(--gold);
       margin-bottom: 0.75rem;
       display: block;
+    }
+
+    /* ── Toast Notification ── */
+    .toast-wrap {
+      position: fixed;
+      top: 1.5rem;
+      right: 1.5rem;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .toast-msg {
+      padding: 0.85rem 1.25rem;
+      border-radius: 2px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+      animation: slideIn 0.3s ease both;
+      min-width: 260px;
+    }
+    .toast-msg.success { background: #1a1814; color: var(--gold-light); border-left: 3px solid var(--gold); }
+    .toast-msg.error   { background: #1a1814; color: #f08080; border-left: 3px solid #b85c38; }
+    .toast-msg.loading { background: #1a1814; color: #c8bfaf; border-left: 3px solid #888; }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(20px); }
+      to   { opacity: 1; transform: translateX(0); }
     }
 
     /* ── Result card ── */
@@ -276,11 +300,7 @@
       margin-bottom: 1.5rem;
     }
 
-    .profile-card .info-grid {
-      display: grid;
-      gap: 1rem;
-    }
-    .profile-card .info-item {}
+    .profile-card .info-grid { display: grid; gap: 1rem; }
     .profile-card .info-label {
       font-size: 0.6rem;
       font-weight: 600;
@@ -320,9 +340,33 @@
       color: #5a5248;
       margin-left: auto;
     }
+
+    /* ── Setup Notice ── */
+    .setup-notice {
+      background: #fff8e7;
+      border: 1px solid rgba(201,168,76,0.4);
+      border-left: 3px solid var(--gold);
+      border-radius: 2px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.82rem;
+      color: #6b5a2e;
+      line-height: 1.6;
+    }
+    .setup-notice strong { color: #4a3b1a; }
+    .setup-notice code {
+      background: rgba(201,168,76,0.15);
+      padding: 0.1rem 0.35rem;
+      border-radius: 2px;
+      font-size: 0.78rem;
+      color: #7a5c1e;
+    }
   </style>
 </head>
 <body>
+
+<!-- Toast container -->
+<div class="toast-wrap" id="toast-wrap"></div>
 
 <div class="container" style="max-width:640px;">
 
@@ -337,11 +381,16 @@
     </div>
   </div>
 
+  <!-- ⚙️ Setup Notice -->
+  <div class="setup-notice">
+    <strong>⚙️ One-time Setup Required:</strong> Replace the <code>SHEET_URL</code> value in the script below with your own Google Apps Script Web App URL.
+    Follow the <strong>3 steps</strong> in the instructions at the bottom of this page.
+  </div>
+
   <!-- Form -->
   <div class="form-card mb-4">
     <form id="signup-form" novalidate>
 
-      <!-- Personal -->
       <span class="field-group-label">Personal Info</span>
       <div class="row g-3 mb-3">
         <div class="col-12">
@@ -358,7 +407,6 @@
         </div>
       </div>
 
-      <!-- Contact -->
       <span class="field-group-label mt-2">Contact</span>
       <div class="row g-3 mb-3">
         <div class="col-12">
@@ -375,7 +423,6 @@
         </div>
       </div>
 
-      <!-- Photo -->
       <span class="field-group-label mt-2">Profile Photo</span>
       <div class="upload-zone mb-4">
         <input type="file" id="photo" accept="image/*"/>
@@ -384,7 +431,7 @@
         <img id="preview-thumb" alt="preview"/>
       </div>
 
-      <button type="submit" class="btn-submit">REGISTER NOW</button>
+      <button type="submit" class="btn-submit" id="submit-btn">REGISTER NOW</button>
     </form>
   </div>
 
@@ -399,11 +446,11 @@
         <h2 class="card-name" id="card-name"></h2>
         <p class="card-email" id="card-email"></p>
         <div class="info-grid">
-          <div class="info-item" id="phone-item">
+          <div class="info-item">
             <p class="info-label">Phone</p>
             <p class="info-value" id="card-phone"></p>
           </div>
-          <div class="info-item" id="address-item">
+          <div class="info-item">
             <p class="info-label">Address</p>
             <p class="info-value" id="card-address"></p>
           </div>
@@ -416,10 +463,80 @@
     </div>
   </div>
 
+  <!-- ── Step-by-Step Instructions ── -->
+  <div class="form-card mb-5" style="background:#fdfcfa;">
+    <span class="field-group-label">📋 Setup Instructions — Google Sheets</span>
+    <div style="font-size:0.85rem; line-height:1.8; color:#4a4035;">
+
+      <p style="margin-bottom:1rem;"><strong>Step 1 — Create your Google Sheet</strong></p>
+      <ol style="padding-left:1.2rem; margin-bottom:1.5rem;">
+        <li>Go to <strong>sheets.google.com</strong> and create a new spreadsheet.</li>
+        <li>In Row 1, add these headers exactly:<br>
+          <code style="background:rgba(201,168,76,0.12); padding:0.2rem 0.4rem; border-radius:2px; font-size:0.78rem;">
+            Timestamp | Name | Email | Phone | Address
+          </code>
+        </li>
+      </ol>
+
+      <p style="margin-bottom:1rem;"><strong>Step 2 — Create a Google Apps Script</strong></p>
+      <ol style="padding-left:1.2rem; margin-bottom:1.5rem;">
+        <li>In your Google Sheet, click <strong>Extensions → Apps Script</strong>.</li>
+        <li>Delete everything and paste this code:</li>
+      </ol>
+      <pre style="background:#1a1814; color:#e8c97a; padding:1rem; border-radius:2px; font-size:0.75rem; overflow-x:auto; margin-bottom:1.5rem; white-space:pre-wrap;">function doPost(e) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var data = JSON.parse(e.postData.contents);
+
+  sheet.appendRow([
+    data.timestamp,
+    data.name,
+    data.email,
+    data.phone,
+    data.address
+  ]);
+
+  return ContentService
+    .createTextOutput(JSON.stringify({ result: "success" }))
+    .setMimeType(ContentService.MimeType.JSON);
+}</pre>
+
+      <p style="margin-bottom:1rem;"><strong>Step 3 — Deploy as Web App</strong></p>
+      <ol style="padding-left:1.2rem; margin-bottom:1rem;">
+        <li>Click <strong>Deploy → New Deployment</strong>.</li>
+        <li>Select type: <strong>Web App</strong>.</li>
+        <li>Set <em>"Execute as"</em> → <strong>Me</strong>.</li>
+        <li>Set <em>"Who has access"</em> → <strong>Anyone</strong>.</li>
+        <li>Click <strong>Deploy</strong> and copy the <strong>Web App URL</strong>.</li>
+        <li>Paste that URL into the <code>SHEET_URL</code> variable in the script of this HTML file.</li>
+      </ol>
+
+      <p style="color:#b85c38; font-size:0.8rem;">⚠️ Note: Photo is not saved to the sheet (Google Sheets doesn't support file uploads directly). Only text data is saved.</p>
+    </div>
+  </div>
+
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+
+  // ══════════════════════════════════════════════
+  //  🔧 REPLACE THIS URL WITH YOUR WEB APP URL
+  // ══════════════════════════════════════════════
+  const SHEET_URL = "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
+  // ══════════════════════════════════════════════
+
+  // Toast helper
+  function showToast(message, type = 'success', duration = 4000) {
+    const wrap = document.getElementById('toast-wrap');
+    const toast = document.createElement('div');
+    const icons = { success: '✓', error: '✕', loading: '⏳' };
+    toast.className = `toast-msg ${type}`;
+    toast.innerHTML = `<span>${icons[type]}</span> ${message}`;
+    wrap.appendChild(toast);
+    if (duration) setTimeout(() => toast.remove(), duration);
+    return toast;
+  }
+
   // Live photo preview
   const photoInput = document.getElementById('photo');
   const previewThumb = document.getElementById('preview-thumb');
@@ -434,7 +551,7 @@
   });
 
   // Form submit
-  document.getElementById('signup-form').addEventListener('submit', function(e) {
+  document.getElementById('signup-form').addEventListener('submit', async function(e) {
     e.preventDefault();
 
     const name    = document.getElementById('name').value.trim();
@@ -442,14 +559,54 @@
     const phone   = document.getElementById('phone').value.trim();
     const address = document.getElementById('address').value.trim();
     const file    = photoInput.files[0];
+    const btn     = document.getElementById('submit-btn');
 
-    if (!name || !email) {
-      document.getElementById('name').classList.add('is-invalid');
-      document.getElementById('email').classList.add('is-invalid');
+    // Validate
+    if (!name) { document.getElementById('name').classList.add('is-invalid'); }
+    if (!email) { document.getElementById('email').classList.add('is-invalid'); }
+    if (!name || !email) return;
+
+    // Check URL configured
+    if (SHEET_URL === "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE") {
+      showToast("⚙️ Please set up your Google Sheet URL first! See instructions below.", 'error', 6000);
       return;
     }
 
-    // Populate card
+    // Loading state
+    btn.disabled = true;
+    btn.textContent = 'SAVING…';
+    const loadingToast = showToast('Saving your data to Google Sheets…', 'loading', 0);
+
+    const timestamp = new Date().toLocaleString('en-US', {
+      month: 'short', day: 'numeric', year: 'numeric',
+      hour: '2-digit', minute: '2-digit'
+    });
+
+    const payload = { timestamp, name, email, phone, address };
+
+    try {
+      // Send to Google Sheets via Apps Script
+      await fetch(SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',   // required for Apps Script
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      // no-cors means we can't read the response, but if no error was thrown, it worked
+      loadingToast.remove();
+      showToast('✓ Data saved to Google Sheets successfully!', 'success');
+
+    } catch (err) {
+      loadingToast.remove();
+      showToast('Failed to save data. Check your Sheet URL.', 'error');
+      console.error(err);
+      btn.disabled = false;
+      btn.textContent = 'REGISTER NOW';
+      return;
+    }
+
+    // Populate profile card
     document.getElementById('card-name').textContent  = name;
     document.getElementById('card-email').textContent = email;
 
@@ -469,21 +626,20 @@
       avatarWrap.innerHTML = '';
       avatarWrap.appendChild(img);
     } else {
-      const initial = name.charAt(0).toUpperCase();
-      avatarWrap.innerHTML = `<div class="avatar-placeholder">${initial}</div>`;
+      avatarWrap.innerHTML = `<div class="avatar-placeholder">${name.charAt(0).toUpperCase()}</div>`;
     }
 
-    // Timestamp
-    document.getElementById('card-time').textContent =
-      new Date().toLocaleString('en-US', { month:'short', day:'numeric', year:'numeric', hour:'2-digit', minute:'2-digit' });
+    document.getElementById('card-time').textContent = timestamp;
 
-    // Show
     const section = document.getElementById('result-section');
     section.style.display = 'block';
     section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    // Reset button
+    btn.disabled = false;
+    btn.textContent = 'REGISTER NOW';
   });
 
-  // Remove invalid on input
   ['name','email'].forEach(id => {
     document.getElementById(id).addEventListener('input', function() {
       this.classList.remove('is-invalid');
