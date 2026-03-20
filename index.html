@@ -10,7 +10,6 @@
     :root {
       --ink: #0f0e0d;
       --cream: #f5f0e8;
-      --warm: #e8dfd0;
       --gold: #c9a84c;
       --gold-light: #e8c97a;
       --rust: #b85c38;
@@ -37,7 +36,6 @@
       margin-bottom: 3rem;
     }
     .page-header .eyebrow {
-      font-family: 'DM Sans', sans-serif;
       font-weight: 500;
       font-size: 0.7rem;
       letter-spacing: 0.3em;
@@ -86,11 +84,9 @@
     .form-floating label {
       font-size: 0.82rem;
       font-weight: 500;
-      letter-spacing: 0.02em;
       color: #888;
     }
     .form-floating > .form-control,
-    .form-floating > .form-control:focus,
     .form-floating > textarea {
       border: 1px solid #e0d9cf;
       border-radius: 2px;
@@ -122,16 +118,8 @@
     .upload-zone input[type="file"] {
       position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
     }
-    .upload-zone .upload-icon {
-      font-size: 1.8rem;
-      margin-bottom: 0.4rem;
-      display: block;
-    }
-    .upload-zone .upload-text {
-      font-size: 0.82rem;
-      color: #888;
-      font-weight: 400;
-    }
+    .upload-zone .upload-icon { font-size: 1.8rem; margin-bottom: 0.4rem; display: block; }
+    .upload-zone .upload-text { font-size: 0.82rem; color: #888; }
     .upload-zone .upload-text strong { color: var(--gold); font-weight: 600; }
     #preview-thumb {
       width: 56px; height: 56px;
@@ -158,16 +146,7 @@
       overflow: hidden;
       transition: background 0.25s, transform 0.1s;
     }
-    .btn-submit::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, transparent 0%, rgba(201,168,76,0.18) 50%, transparent 100%);
-      transform: translateX(-100%);
-      transition: transform 0.5s ease;
-    }
     .btn-submit:hover { background: #2a2620; transform: translateY(-1px); }
-    .btn-submit:hover::after { transform: translateX(100%); }
     .btn-submit:active { transform: translateY(0); }
     .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
@@ -181,11 +160,10 @@
       display: block;
     }
 
-    /* ── Toast Notification ── */
+    /* Toast */
     .toast-wrap {
       position: fixed;
-      top: 1.5rem;
-      right: 1.5rem;
+      top: 1.5rem; right: 1.5rem;
       z-index: 9999;
       display: flex;
       flex-direction: column;
@@ -211,30 +189,48 @@
       to   { opacity: 1; transform: translateX(0); }
     }
 
-    /* ── Result card ── */
-    #result-section { display: none; }
-    #result-section .section-title {
+    /* All Signups */
+    #all-signups { margin-top: 2rem; }
+    .signups-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+    }
+    .signups-header .section-title {
       font-family: 'Playfair Display', serif;
       font-size: 1.4rem;
       color: var(--ink);
-      margin-bottom: 1.5rem;
       position: relative;
       padding-bottom: 0.6rem;
     }
-    #result-section .section-title::after {
+    .signups-header .section-title::after {
       content: '';
       position: absolute;
       bottom: 0; left: 0;
       width: 40px; height: 2px;
       background: var(--gold);
     }
+    .signups-count {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.25);
+      padding: 0.3rem 0.75rem;
+      border-radius: 1px;
+    }
 
+    /* Profile Card */
     .profile-card {
       background: var(--dark-surface);
       border-radius: 2px;
       overflow: hidden;
       box-shadow: var(--shadow);
       animation: cardReveal 0.5s cubic-bezier(0.22,1,0.36,1) both;
+      margin-bottom: 1.25rem;
     }
     @keyframes cardReveal {
       from { opacity: 0; transform: translateY(24px); }
@@ -242,133 +238,137 @@
     }
 
     .profile-card .card-banner {
-      height: 80px;
+      height: 70px;
       background: linear-gradient(135deg, #1a1410 0%, #2e2418 50%, #1a1410 100%);
       position: relative;
     }
     .profile-card .card-banner::after {
       content: '';
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       background: repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 10px,
+        45deg, transparent, transparent 10px,
         rgba(201,168,76,0.04) 10px,
         rgba(201,168,76,0.04) 11px
       );
     }
-
     .profile-card .avatar-wrap {
-      width: 80px; height: 80px;
+      width: 70px; height: 70px;
       border-radius: 50%;
       border: 3px solid var(--gold);
       overflow: hidden;
       position: absolute;
-      bottom: -40px; left: 1.75rem;
+      bottom: -35px; left: 1.5rem;
       background: #2a2620;
       box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-    }
-    .profile-card .avatar-wrap img {
-      width: 100%; height: 100%; object-fit: cover;
+      z-index: 1;
     }
     .profile-card .avatar-placeholder {
       width: 100%; height: 100%;
       display: flex; align-items: center; justify-content: center;
       font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       color: var(--gold);
       background: #2a2620;
     }
-
     .profile-card .card-body {
-      padding: 3rem 1.75rem 1.75rem;
+      padding: 2.8rem 1.5rem 1.5rem;
       color: #f0ece4;
     }
     .profile-card .card-name {
       font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       font-weight: 700;
       color: #f5f0e8;
-      line-height: 1.2;
-      margin-bottom: 0.2rem;
+      margin-bottom: 0.15rem;
     }
     .profile-card .card-email {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: var(--gold-light);
       letter-spacing: 0.03em;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.2rem;
     }
-
-    .profile-card .info-grid { display: grid; gap: 1rem; }
-    .profile-card .info-label {
-      font-size: 0.6rem;
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    .info-label {
+      font-size: 0.58rem;
       font-weight: 600;
       letter-spacing: 0.25em;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 0.2rem;
+      margin-bottom: 0.15rem;
     }
-    .profile-card .info-value {
-      font-size: 0.9rem;
+    .info-value {
+      font-size: 0.85rem;
       color: #c8bfaf;
       font-weight: 300;
-      line-height: 1.5;
+      line-height: 1.4;
     }
-    .profile-card .info-value.empty { color: #5a5248; font-style: italic; }
-
-    .profile-card .card-footer-bar {
+    .info-value.empty { color: #5a5248; font-style: italic; }
+    .card-footer-bar {
       border-top: 1px solid rgba(255,255,255,0.06);
-      padding: 1rem 1.75rem;
+      padding: 0.85rem 1.5rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
     .badge-registered {
-      font-size: 0.65rem;
+      font-size: 0.62rem;
       font-weight: 600;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       background: rgba(201,168,76,0.15);
       color: var(--gold-light);
       border: 1px solid rgba(201,168,76,0.3);
-      padding: 0.25rem 0.6rem;
+      padding: 0.2rem 0.55rem;
       border-radius: 1px;
     }
-    .timestamp {
-      font-size: 0.7rem;
-      color: #5a5248;
-      margin-left: auto;
-    }
+    .timestamp { font-size: 0.68rem; color: #5a5248; margin-left: auto; }
 
-    /* ── Setup Notice ── */
-    .setup-notice {
-      background: #fff8e7;
+    /* States */
+    .empty-state {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: #b0a898;
+    }
+    .empty-state .empty-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+    .empty-state p { font-size: 0.85rem; }
+    .loading-state {
+      text-align: center;
+      padding: 2.5rem 1rem;
+      color: #b0a898;
+      font-size: 0.85rem;
+    }
+    .spinner {
+      display: inline-block;
+      width: 18px; height: 18px;
+      border: 2px solid rgba(201,168,76,0.3);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      margin-right: 0.5rem;
+      vertical-align: middle;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .btn-refresh {
+      background: transparent;
       border: 1px solid rgba(201,168,76,0.4);
-      border-left: 3px solid var(--gold);
+      color: var(--gold);
       border-radius: 2px;
-      padding: 1rem 1.25rem;
-      margin-bottom: 1.5rem;
-      font-size: 0.82rem;
-      color: #6b5a2e;
-      line-height: 1.6;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.85rem;
+      cursor: pointer;
+      transition: background 0.2s;
     }
-    .setup-notice strong { color: #4a3b1a; }
-    .setup-notice code {
-      background: rgba(201,168,76,0.15);
-      padding: 0.1rem 0.35rem;
-      border-radius: 2px;
-      font-size: 0.78rem;
-      color: #7a5c1e;
-    }
+    .btn-refresh:hover { background: rgba(201,168,76,0.1); }
   </style>
 </head>
 <body>
 
-<!-- Toast container -->
 <div class="toast-wrap" id="toast-wrap"></div>
 
-<div class="container" style="max-width:640px;">
+<div class="container" style="max-width:680px;">
 
   <!-- Header -->
   <div class="page-header">
@@ -381,14 +381,8 @@
     </div>
   </div>
 
-  <!-- ⚙️ Setup Notice -->
-  <!-- <div class="setup-notice">
-    <strong>⚙️ One-time Setup Required:</strong> Replace the <code>SHEET_URL</code> value in the script below with your own Google Apps Script Web App URL.
-    Follow the <strong>3 steps</strong> in the instructions at the bottom of this page.
-  </div> -->
-
   <!-- Form -->
-  <div class="form-card mb-4">
+  <div class="form-card mb-5">
     <form id="signup-form" novalidate>
 
       <span class="field-group-label">Personal Info</span>
@@ -427,7 +421,7 @@
       <div class="upload-zone mb-4">
         <input type="file" id="photo" accept="image/*"/>
         <span class="upload-icon">📷</span>
-        <p class="upload-text mb-0"><strong>Click to upload</strong> or drag & drop<br>PNG, JPG, GIF up to 10MB</p>
+        <p class="upload-text mb-0"><strong>Click to upload</strong> or drag & drop</p>
         <img id="preview-thumb" alt="preview"/>
       </div>
 
@@ -435,84 +429,19 @@
     </form>
   </div>
 
-  <!-- Result -->
-  <div id="result-section" class="mb-5">
-    <p class="section-title">Your Profile</p>
-    <div class="profile-card">
-      <div class="card-banner" style="position:relative;">
-        <div class="avatar-wrap" id="avatar-wrap"></div>
+  <!-- All Registered Members -->
+  <div id="all-signups">
+    <div class="signups-header">
+      <p class="section-title">Registered Members</p>
+      <div style="display:flex;gap:0.5rem;align-items:center;">
+        <span class="signups-count" id="signups-count">— members</span>
+        <button class="btn-refresh" onclick="loadAllSignups()">↻ Refresh</button>
       </div>
-      <div class="card-body">
-        <h2 class="card-name" id="card-name"></h2>
-        <p class="card-email" id="card-email"></p>
-        <div class="info-grid">
-          <div class="info-item">
-            <p class="info-label">Phone</p>
-            <p class="info-value" id="card-phone"></p>
-          </div>
-          <div class="info-item">
-            <p class="info-label">Address</p>
-            <p class="info-value" id="card-address"></p>
-          </div>
-        </div>
-      </div>
-      <div class="card-footer-bar">
-        <span class="badge-registered">✓ Registered</span>
-        <span class="timestamp" id="card-time"></span>
-      </div>
+    </div>
+    <div id="cards-container">
+      <div class="loading-state"><span class="spinner"></span> Loading members…</div>
     </div>
   </div>
-
-  <!-- ── Step-by-Step Instructions ── -->
-  <!-- <div class="form-card mb-5" style="background:#fdfcfa;">
-    <span class="field-group-label">📋 Setup Instructions — Google Sheets</span>
-    <div style="font-size:0.85rem; line-height:1.8; color:#4a4035;">
-
-      <p style="margin-bottom:1rem;"><strong>Step 1 — Create your Google Sheet</strong></p>
-      <ol style="padding-left:1.2rem; margin-bottom:1.5rem;">
-        <li>Go to <strong>sheets.google.com</strong> and create a new spreadsheet.</li>
-        <li>In Row 1, add these headers exactly:<br>
-          <code style="background:rgba(201,168,76,0.12); padding:0.2rem 0.4rem; border-radius:2px; font-size:0.78rem;">
-            Timestamp | Name | Email | Phone | Address
-          </code>
-        </li>
-      </ol>
-
-      <p style="margin-bottom:1rem;"><strong>Step 2 — Create a Google Apps Script</strong></p>
-      <ol style="padding-left:1.2rem; margin-bottom:1.5rem;">
-        <li>In your Google Sheet, click <strong>Extensions → Apps Script</strong>.</li>
-        <li>Delete everything and paste this code:</li>
-      </ol>
-      <pre style="background:#1a1814; color:#e8c97a; padding:1rem; border-radius:2px; font-size:0.75rem; overflow-x:auto; margin-bottom:1.5rem; white-space:pre-wrap;">function doPost(e) {
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-  var data = JSON.parse(e.postData.contents);
-
-  sheet.appendRow([
-    data.timestamp,
-    data.name,
-    data.email,
-    data.phone,
-    data.address
-  ]);
-
-  return ContentService
-    .createTextOutput(JSON.stringify({ result: "success" }))
-    .setMimeType(ContentService.MimeType.JSON);
-}</pre>
-
-      <p style="margin-bottom:1rem;"><strong>Step 3 — Deploy as Web App</strong></p>
-      <ol style="padding-left:1.2rem; margin-bottom:1rem;">
-        <li>Click <strong>Deploy → New Deployment</strong>.</li>
-        <li>Select type: <strong>Web App</strong>.</li>
-        <li>Set <em>"Execute as"</em> → <strong>Me</strong>.</li>
-        <li>Set <em>"Who has access"</em> → <strong>Anyone</strong>.</li>
-        <li>Click <strong>Deploy</strong> and copy the <strong>Web App URL</strong>.</li>
-        <li>Paste that URL into the <code>SHEET_URL</code> variable in the script of this HTML file.</li>
-      </ol>
-
-      <p style="color:#b85c38; font-size:0.8rem;">⚠️ Note: Photo is not saved to the sheet (Google Sheets doesn't support file uploads directly). Only text data is saved.</p>
-    </div>
-  </div> -->
 
 </div>
 
@@ -520,16 +449,15 @@
 <script>
 
   // ══════════════════════════════════════════════
-  //  🔧 REPLACE THIS URL WITH YOUR WEB APP URL
+  //  YOUR GOOGLE APPS SCRIPT URL
   // ══════════════════════════════════════════════
   const SHEET_URL = "https://script.google.com/macros/s/AKfycby1mWYm7Yu6B1JsvqZgqO4sGL5AfT9Xkvw-pBG-USomZ01795K5D2bnUIfmn_fzf9A/exec";
-  // ══════════════════════════════════════════════
 
-  // Toast helper
+  // ── Toast ──
   function showToast(message, type = 'success', duration = 4000) {
     const wrap = document.getElementById('toast-wrap');
-    const toast = document.createElement('div');
     const icons = { success: '✓', error: '✕', loading: '⏳' };
+    const toast = document.createElement('div');
     toast.className = `toast-msg ${type}`;
     toast.innerHTML = `<span>${icons[type]}</span> ${message}`;
     wrap.appendChild(toast);
@@ -537,20 +465,97 @@
     return toast;
   }
 
-  // Live photo preview
-  const photoInput = document.getElementById('photo');
+  // ── Escape HTML ──
+  function escHtml(str) {
+    return String(str || '')
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  // ── Build card HTML ──
+  function buildCard(member, delay = 0) {
+    const initial = (member.name || '?').charAt(0).toUpperCase();
+    const phone   = member.phone   || '';
+    const address = member.address || '';
+    const card = document.createElement('div');
+    card.className = 'profile-card';
+    card.style.animationDelay = delay + 'ms';
+    card.innerHTML = `
+      <div class="card-banner" style="position:relative;">
+        <div class="avatar-wrap">
+          <div class="avatar-placeholder">${initial}</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <h2 class="card-name">${escHtml(member.name)}</h2>
+        <p class="card-email">${escHtml(member.email)}</p>
+        <div class="info-grid">
+          <div>
+            <p class="info-label">Phone</p>
+            <p class="info-value ${phone ? '' : 'empty'}">${phone ? escHtml(phone) : '—'}</p>
+          </div>
+          <div>
+            <p class="info-label">Address</p>
+            <p class="info-value ${address ? '' : 'empty'}">${address ? escHtml(address) : '—'}</p>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer-bar">
+        <span class="badge-registered">✓ Registered</span>
+        <span class="timestamp">${escHtml(member.timestamp)}</span>
+      </div>`;
+    return card;
+  }
+
+  // ── Load all members from Google Sheets ──
+  async function loadAllSignups() {
+    const container = document.getElementById('cards-container');
+    container.innerHTML = '<div class="loading-state"><span class="spinner"></span> Loading members…</div>';
+
+    try {
+      const res  = await fetch(SHEET_URL);
+      const json = await res.json();
+
+      if (!json.data || json.data.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-icon">👥</div>
+            <p>No members yet. Be the first to sign up!</p>
+          </div>`;
+        document.getElementById('signups-count').textContent = '0 members';
+        return;
+      }
+
+      const members = [...json.data].reverse(); // newest first
+      container.innerHTML = '';
+      members.forEach((m, i) => container.appendChild(buildCard(m, i * 60)));
+
+      const c = members.length;
+      document.getElementById('signups-count').textContent = c + (c === 1 ? ' member' : ' members');
+
+    } catch (err) {
+      container.innerHTML = `
+        <div class="empty-state">
+          <div class="empty-icon">⚠️</div>
+          <p>Could not load members. Make sure your Apps Script is redeployed with the new doGet function.</p>
+        </div>`;
+      console.error('Load error:', err);
+    }
+  }
+
+  // ── Photo preview ──
+  const photoInput   = document.getElementById('photo');
   const previewThumb = document.getElementById('preview-thumb');
   photoInput.addEventListener('change', () => {
     const file = photoInput.files[0];
     if (file) {
-      const url = URL.createObjectURL(file);
-      previewThumb.src = url;
+      previewThumb.src = URL.createObjectURL(file);
       previewThumb.style.display = 'block';
       document.querySelector('.upload-icon').style.display = 'none';
     }
   });
 
-  // Form submit
+  // ── Submit form ──
   document.getElementById('signup-form').addEventListener('submit', async function(e) {
     e.preventDefault();
 
@@ -558,84 +563,46 @@
     const email   = document.getElementById('email').value.trim();
     const phone   = document.getElementById('phone').value.trim();
     const address = document.getElementById('address').value.trim();
-    const file    = photoInput.files[0];
     const btn     = document.getElementById('submit-btn');
 
-    // Validate
-    if (!name) { document.getElementById('name').classList.add('is-invalid'); }
-    if (!email) { document.getElementById('email').classList.add('is-invalid'); }
+    if (!name)  document.getElementById('name').classList.add('is-invalid');
+    if (!email) document.getElementById('email').classList.add('is-invalid');
     if (!name || !email) return;
 
-    // Check URL configured
-    if (SHEET_URL === "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE") {
-      showToast("⚙️ Please set up your Google Sheet URL first! See instructions below.", 'error', 6000);
-      return;
-    }
-
-    // Loading state
     btn.disabled = true;
     btn.textContent = 'SAVING…';
-    const loadingToast = showToast('Saving your data to Google Sheets…', 'loading', 0);
+    const loadingToast = showToast('Saving your data…', 'loading', 0);
 
     const timestamp = new Date().toLocaleString('en-US', {
-      month: 'short', day: 'numeric', year: 'numeric',
-      hour: '2-digit', minute: '2-digit'
+      month:'short', day:'numeric', year:'numeric',
+      hour:'2-digit', minute:'2-digit'
     });
 
-    const payload = { timestamp, name, email, phone, address };
-
     try {
-      // Send to Google Sheets via Apps Script
       await fetch(SHEET_URL, {
         method: 'POST',
-        mode: 'no-cors',   // required for Apps Script
+        mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+        body: JSON.stringify({ timestamp, name, email, phone, address })
       });
 
-      // no-cors means we can't read the response, but if no error was thrown, it worked
       loadingToast.remove();
-      showToast('✓ Data saved to Google Sheets successfully!', 'success');
+      showToast('✓ Registered! Card will appear below shortly.', 'success');
+
+      // Reset form
+      this.reset();
+      previewThumb.style.display = 'none';
+      document.querySelector('.upload-icon').style.display = 'block';
+
+      // Reload cards after short delay (sheet needs time to write)
+      setTimeout(() => loadAllSignups(), 2000);
 
     } catch (err) {
       loadingToast.remove();
-      showToast('Failed to save data. Check your Sheet URL.', 'error');
+      showToast('Failed to save. Please try again.', 'error');
       console.error(err);
-      btn.disabled = false;
-      btn.textContent = 'REGISTER NOW';
-      return;
     }
 
-    // Populate profile card
-    document.getElementById('card-name').textContent  = name;
-    document.getElementById('card-email').textContent = email;
-
-    const phoneEl   = document.getElementById('card-phone');
-    const addressEl = document.getElementById('card-address');
-    phoneEl.textContent   = phone   || '—';
-    addressEl.textContent = address || '—';
-    phoneEl.className   = 'info-value' + (phone   ? '' : ' empty');
-    addressEl.className = 'info-value' + (address ? '' : ' empty');
-
-    // Avatar
-    const avatarWrap = document.getElementById('avatar-wrap');
-    if (file) {
-      const img = document.createElement('img');
-      img.src = URL.createObjectURL(file);
-      img.alt = name;
-      avatarWrap.innerHTML = '';
-      avatarWrap.appendChild(img);
-    } else {
-      avatarWrap.innerHTML = `<div class="avatar-placeholder">${name.charAt(0).toUpperCase()}</div>`;
-    }
-
-    document.getElementById('card-time').textContent = timestamp;
-
-    const section = document.getElementById('result-section');
-    section.style.display = 'block';
-    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-    // Reset button
     btn.disabled = false;
     btn.textContent = 'REGISTER NOW';
   });
@@ -645,6 +612,10 @@
       this.classList.remove('is-invalid');
     });
   });
+
+  // Load on page start
+  loadAllSignups();
+
 </script>
 </body>
 </html>
