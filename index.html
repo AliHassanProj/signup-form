@@ -17,9 +17,7 @@
       --card-bg: #ffffff;
       --shadow: 0 20px 60px rgba(0,0,0,0.12);
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
       font-family: 'DM Sans', sans-serif;
       background-color: var(--cream);
@@ -30,89 +28,49 @@
       padding: 3rem 1rem;
       color: var(--ink);
     }
-
-    .page-header {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
+    .page-header { text-align: center; margin-bottom: 3rem; }
     .page-header .eyebrow {
-      font-weight: 500;
-      font-size: 0.7rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.5rem;
+      font-weight: 500; font-size: 0.7rem; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem;
     }
     .page-header h1 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      font-weight: 700;
-      color: var(--ink);
-      line-height: 1.1;
+      font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700;
+      color: var(--ink); line-height: 1.1;
     }
     .page-header .divider {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.75rem;
-      margin-top: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      gap: 0.75rem; margin-top: 1rem;
     }
     .page-header .divider span {
-      display: block;
-      width: 48px;
-      height: 1px;
-      background: var(--gold);
-      opacity: 0.6;
+      display: block; width: 48px; height: 1px;
+      background: var(--gold); opacity: 0.6;
     }
-
     .form-card {
-      background: var(--card-bg);
-      border-radius: 2px;
+      background: var(--card-bg); border-radius: 2px;
       box-shadow: var(--shadow), inset 0 0 0 1px rgba(201,168,76,0.15);
-      padding: 2.5rem 2.5rem 2rem;
-      position: relative;
-      overflow: hidden;
+      padding: 2.5rem 2.5rem 2rem; position: relative; overflow: hidden;
     }
     .form-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
       background: linear-gradient(90deg, var(--gold), var(--rust), var(--gold));
     }
-
-    .form-floating label {
-      font-size: 0.82rem;
-      font-weight: 500;
-      color: #888;
-    }
+    .form-floating label { font-size: 0.82rem; font-weight: 500; color: #888; }
     .form-floating > .form-control,
     .form-floating > textarea {
-      border: 1px solid #e0d9cf;
-      border-radius: 2px;
-      background: #fdfcfa;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.95rem;
-      color: var(--ink);
+      border: 1px solid #e0d9cf; border-radius: 2px; background: #fdfcfa;
+      font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--ink);
       transition: border-color 0.2s, box-shadow 0.2s;
     }
     .form-floating > .form-control:focus,
     .form-floating > textarea:focus {
-      border-color: var(--gold);
-      box-shadow: 0 0 0 3px rgba(201,168,76,0.12);
-      background: #fff;
+      border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,0.12); background: #fff;
     }
     textarea.form-control { resize: none; }
-
     .upload-zone {
-      border: 1.5px dashed #d4c9b5;
-      border-radius: 2px;
-      background: #fdfcfa;
-      padding: 1.5rem;
-      text-align: center;
-      cursor: pointer;
-      transition: border-color 0.2s, background 0.2s;
-      position: relative;
+      border: 1.5px dashed #d4c9b5; border-radius: 2px; background: #fdfcfa;
+      padding: 1.5rem; text-align: center; cursor: pointer;
+      transition: border-color 0.2s, background 0.2s; position: relative;
     }
     .upload-zone:hover { border-color: var(--gold); background: #fffef9; }
     .upload-zone input[type="file"] {
@@ -122,246 +80,135 @@
     .upload-zone .upload-text { font-size: 0.82rem; color: #888; }
     .upload-zone .upload-text strong { color: var(--gold); font-weight: 600; }
     #preview-thumb {
-      width: 56px; height: 56px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid var(--gold);
-      display: none;
-      margin: 0.5rem auto 0;
+      width: 72px; height: 72px; border-radius: 50%; object-fit: cover;
+      border: 2px solid var(--gold); display: none; margin: 0.75rem auto 0;
     }
-
+    .upload-progress {
+      height: 3px; background: rgba(201,168,76,0.2); border-radius: 2px;
+      margin-top: 0.75rem; overflow: hidden; display: none;
+    }
+    .upload-progress-bar {
+      height: 100%; background: var(--gold);
+      animation: progressAnim 1.5s ease-in-out infinite;
+    }
+    @keyframes progressAnim {
+      0% { width: 0%; } 50% { width: 70%; } 100% { width: 100%; }
+    }
     .btn-submit {
-      background: var(--ink);
-      color: var(--cream);
-      border: none;
-      border-radius: 2px;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 500;
-      font-size: 0.85rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      padding: 0.85rem 2rem;
-      width: 100%;
-      position: relative;
-      overflow: hidden;
+      background: var(--ink); color: var(--cream); border: none; border-radius: 2px;
+      font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 0.85rem;
+      letter-spacing: 0.15em; text-transform: uppercase; padding: 0.85rem 2rem;
+      width: 100%; position: relative; overflow: hidden;
       transition: background 0.25s, transform 0.1s;
     }
     .btn-submit:hover { background: #2a2620; transform: translateY(-1px); }
     .btn-submit:active { transform: translateY(0); }
     .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-
     .field-group-label {
-      font-size: 0.65rem;
-      font-weight: 600;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.75rem;
-      display: block;
+      font-size: 0.65rem; font-weight: 600; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem; display: block;
     }
 
     /* Toast */
-    .toast-wrap {
-      position: fixed;
-      top: 1.5rem; right: 1.5rem;
-      z-index: 9999;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
+    .toast-wrap { position: fixed; top: 1.5rem; right: 1.5rem; z-index: 9999; display: flex; flex-direction: column; gap: 0.5rem; }
     .toast-msg {
-      padding: 0.85rem 1.25rem;
-      border-radius: 2px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
-      animation: slideIn 0.3s ease both;
-      min-width: 260px;
+      padding: 0.85rem 1.25rem; border-radius: 2px; font-size: 0.85rem; font-weight: 500;
+      display: flex; align-items: center; gap: 0.6rem;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.15); animation: slideIn 0.3s ease both; min-width: 260px;
     }
     .toast-msg.success { background: #1a1814; color: var(--gold-light); border-left: 3px solid var(--gold); }
     .toast-msg.error   { background: #1a1814; color: #f08080; border-left: 3px solid #b85c38; }
     .toast-msg.loading { background: #1a1814; color: #c8bfaf; border-left: 3px solid #888; }
-    @keyframes slideIn {
-      from { opacity: 0; transform: translateX(20px); }
-      to   { opacity: 1; transform: translateX(0); }
-    }
+    @keyframes slideIn { from { opacity:0; transform:translateX(20px); } to { opacity:1; transform:translateX(0); } }
 
     /* All Signups */
     #all-signups { margin-top: 2rem; }
-    .signups-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 1.5rem;
-    }
+    .signups-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
     .signups-header .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4rem;
-      color: var(--ink);
-      position: relative;
-      padding-bottom: 0.6rem;
+      font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--ink);
+      position: relative; padding-bottom: 0.6rem;
     }
     .signups-header .section-title::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0;
-      width: 40px; height: 2px;
-      background: var(--gold);
+      content: ''; position: absolute; bottom: 0; left: 0; width: 40px; height: 2px; background: var(--gold);
     }
     .signups-count {
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--gold);
-      background: rgba(201,168,76,0.1);
-      border: 1px solid rgba(201,168,76,0.25);
-      padding: 0.3rem 0.75rem;
-      border-radius: 1px;
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--gold); background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.25);
+      padding: 0.3rem 0.75rem; border-radius: 1px;
     }
 
     /* Profile Card */
     .profile-card {
-      background: var(--dark-surface);
-      border-radius: 2px;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      animation: cardReveal 0.5s cubic-bezier(0.22,1,0.36,1) both;
-      margin-bottom: 1.25rem;
+      background: var(--dark-surface); border-radius: 2px; overflow: hidden;
+      box-shadow: var(--shadow); animation: cardReveal 0.5s cubic-bezier(0.22,1,0.36,1) both; margin-bottom: 1.25rem;
     }
-    @keyframes cardReveal {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
+    @keyframes cardReveal { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
     .profile-card .card-banner {
       height: 70px;
       background: linear-gradient(135deg, #1a1410 0%, #2e2418 50%, #1a1410 100%);
       position: relative;
     }
     .profile-card .card-banner::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: repeating-linear-gradient(
-        45deg, transparent, transparent 10px,
-        rgba(201,168,76,0.04) 10px,
-        rgba(201,168,76,0.04) 11px
-      );
+      content: ''; position: absolute; inset: 0;
+      background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(201,168,76,0.04) 10px, rgba(201,168,76,0.04) 11px);
     }
     .profile-card .avatar-wrap {
-      width: 70px; height: 70px;
-      border-radius: 50%;
-      border: 3px solid var(--gold);
-      overflow: hidden;
-      position: absolute;
-      bottom: -35px; left: 1.5rem;
-      background: #2a2620;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-      z-index: 1;
+      width: 74px; height: 74px; border-radius: 50%; border: 3px solid var(--gold); overflow: hidden;
+      position: absolute; bottom: -37px; left: 1.5rem; background: #2a2620;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4); z-index: 1;
     }
+    .profile-card .avatar-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .profile-card .avatar-placeholder {
-      width: 100%; height: 100%;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
-      color: var(--gold);
-      background: #2a2620;
+      width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif; font-size: 1.7rem; color: var(--gold); background: #2a2620;
     }
-    .profile-card .card-body {
-      padding: 2.8rem 1.5rem 1.5rem;
-      color: #f0ece4;
-    }
+    .profile-card .card-body { padding: 3rem 1.5rem 1.5rem; color: #f0ece4; }
     .profile-card .card-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: #f5f0e8;
-      margin-bottom: 0.15rem;
+      font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700;
+      color: #f5f0e8; margin-bottom: 0.15rem;
     }
-    .profile-card .card-email {
-      font-size: 0.78rem;
-      color: var(--gold-light);
-      letter-spacing: 0.03em;
-      margin-bottom: 1.2rem;
-    }
+    .profile-card .card-email { font-size: 0.78rem; color: var(--gold-light); letter-spacing: 0.03em; margin-bottom: 1.2rem; }
     .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
-    .info-label {
-      font-size: 0.58rem;
-      font-weight: 600;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.15rem;
-    }
-    .info-value {
-      font-size: 0.85rem;
-      color: #c8bfaf;
-      font-weight: 300;
-      line-height: 1.4;
-    }
+    .info-label { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.15rem; }
+    .info-value { font-size: 0.85rem; color: #c8bfaf; font-weight: 300; line-height: 1.4; }
     .info-value.empty { color: #5a5248; font-style: italic; }
     .card-footer-bar {
-      border-top: 1px solid rgba(255,255,255,0.06);
-      padding: 0.85rem 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      border-top: 1px solid rgba(255,255,255,0.06); padding: 0.85rem 1.5rem;
+      display: flex; align-items: center; gap: 0.5rem;
     }
     .badge-registered {
-      font-size: 0.62rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      background: rgba(201,168,76,0.15);
-      color: var(--gold-light);
-      border: 1px solid rgba(201,168,76,0.3);
-      padding: 0.2rem 0.55rem;
-      border-radius: 1px;
+      font-size: 0.62rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+      background: rgba(201,168,76,0.15); color: var(--gold-light); border: 1px solid rgba(201,168,76,0.3);
+      padding: 0.2rem 0.55rem; border-radius: 1px;
     }
     .timestamp { font-size: 0.68rem; color: #5a5248; margin-left: auto; }
 
     /* States */
-    .empty-state {
-      text-align: center;
-      padding: 3rem 1rem;
-      color: #b0a898;
-    }
+    .empty-state { text-align: center; padding: 3rem 1rem; color: #b0a898; }
     .empty-state .empty-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
     .empty-state p { font-size: 0.85rem; }
-    .loading-state {
-      text-align: center;
-      padding: 2.5rem 1rem;
-      color: #b0a898;
-      font-size: 0.85rem;
-    }
+    .loading-state { text-align: center; padding: 2.5rem 1rem; color: #b0a898; font-size: 0.85rem; }
     .spinner {
-      display: inline-block;
-      width: 18px; height: 18px;
-      border: 2px solid rgba(201,168,76,0.3);
-      border-top-color: var(--gold);
-      border-radius: 50%;
-      animation: spin 0.7s linear infinite;
-      margin-right: 0.5rem;
-      vertical-align: middle;
+      display: inline-block; width: 18px; height: 18px;
+      border: 2px solid rgba(201,168,76,0.3); border-top-color: var(--gold);
+      border-radius: 50%; animation: spin 0.7s linear infinite;
+      margin-right: 0.5rem; vertical-align: middle;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
     .btn-refresh {
-      background: transparent;
-      border: 1px solid rgba(201,168,76,0.4);
-      color: var(--gold);
-      border-radius: 2px;
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 0.35rem 0.85rem;
-      cursor: pointer;
-      transition: background 0.2s;
+      background: transparent; border: 1px solid rgba(201,168,76,0.4); color: var(--gold);
+      border-radius: 2px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; padding: 0.35rem 0.85rem; cursor: pointer; transition: background 0.2s;
     }
     .btn-refresh:hover { background: rgba(201,168,76,0.1); }
+
+    /* Image loading shimmer */
+    .avatar-wrap.loading-img {
+      background: linear-gradient(90deg, #2a2620 25%, #3a3028 50%, #2a2620 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+    }
+    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
   </style>
 </head>
 <body>
@@ -418,11 +265,14 @@
       </div>
 
       <span class="field-group-label mt-2">Profile Photo</span>
-      <div class="upload-zone mb-4">
+      <div class="upload-zone mb-4" id="upload-zone">
         <input type="file" id="photo" accept="image/*"/>
-        <span class="upload-icon">📷</span>
-        <p class="upload-text mb-0"><strong>Click to upload</strong> or drag & drop</p>
+        <span class="upload-icon" id="upload-icon">📷</span>
+        <p class="upload-text mb-0"><strong>Click to upload</strong> or drag & drop<br><span style="font-size:0.75rem;color:#aaa;">PNG, JPG up to 5MB</span></p>
         <img id="preview-thumb" alt="preview"/>
+        <div class="upload-progress" id="upload-progress">
+          <div class="upload-progress-bar"></div>
+        </div>
       </div>
 
       <button type="submit" class="btn-submit" id="submit-btn">REGISTER NOW</button>
@@ -451,40 +301,54 @@
   // ══════════════════════════════════════════════
   //  YOUR GOOGLE APPS SCRIPT URL
   // ══════════════════════════════════════════════
-  const SHEET_URL = "https://script.google.com/macros/s/AKfycbz1zysnX7I3WM73fE-_u8QqNgROLgdg1R-1zvUgLrON2BRJMynd1btexUML1hvL3ZCn/exec";
+  const SHEET_URL = "https://script.google.com/macros/s/AKfycby1mWYm7Yu6B1JsvqZgqO4sGL5AfT9Xkvw-pBG-USomZ01795K5D2bnUIfmn_fzf9A/exec";
 
   // ── Toast ──
-  function showToast(message, type = 'success', duration = 4000) {
-    const wrap = document.getElementById('toast-wrap');
+  function showToast(msg, type = 'success', duration = 4000) {
     const icons = { success: '✓', error: '✕', loading: '⏳' };
     const toast = document.createElement('div');
     toast.className = `toast-msg ${type}`;
-    toast.innerHTML = `<span>${icons[type]}</span> ${message}`;
-    wrap.appendChild(toast);
+    toast.innerHTML = `<span>${icons[type]}</span> ${msg}`;
+    document.getElementById('toast-wrap').appendChild(toast);
     if (duration) setTimeout(() => toast.remove(), duration);
     return toast;
   }
 
-  // ── Escape HTML ──
   function escHtml(str) {
     return String(str || '')
       .replace(/&/g,'&amp;').replace(/</g,'&lt;')
       .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
-  // ── Build card HTML ──
+  // ── Convert file to base64 ──
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload  = () => resolve(reader.result.split(',')[1]); // strip data:...;base64,
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  // ── Build profile card ──
   function buildCard(member, delay = 0) {
-    const initial = (member.name || '?').charAt(0).toUpperCase();
-    const phone   = member.phone   || '';
-    const address = member.address || '';
+    const initial  = (member.name || '?').charAt(0).toUpperCase();
+    const phone    = member.phone    || '';
+    const address  = member.address  || '';
+    const imageUrl = member.imageUrl || '';
+
+    const avatarHtml = imageUrl
+      ? `<img src="${escHtml(imageUrl)}" alt="${escHtml(member.name)}" 
+              onload="this.parentElement.classList.remove('loading-img')"
+              onerror="this.outerHTML='<div class=\\'avatar-placeholder\\'>${initial}</div>'">`
+      : `<div class="avatar-placeholder">${initial}</div>`;
+
     const card = document.createElement('div');
     card.className = 'profile-card';
     card.style.animationDelay = delay + 'ms';
     card.innerHTML = `
       <div class="card-banner" style="position:relative;">
-        <div class="avatar-wrap">
-          <div class="avatar-placeholder">${initial}</div>
-        </div>
+        <div class="avatar-wrap ${imageUrl ? 'loading-img' : ''}">${avatarHtml}</div>
       </div>
       <div class="card-body">
         <h2 class="card-name">${escHtml(member.name)}</h2>
@@ -507,55 +371,54 @@
     return card;
   }
 
-  // ── Load all members from Google Sheets ──
+  // ── Load all members ──
   async function loadAllSignups() {
     const container = document.getElementById('cards-container');
     container.innerHTML = '<div class="loading-state"><span class="spinner"></span> Loading members…</div>';
-
     try {
       const res  = await fetch(SHEET_URL);
       const json = await res.json();
 
       if (!json.data || json.data.length === 0) {
-        container.innerHTML = `
-          <div class="empty-state">
-            <div class="empty-icon">👥</div>
-            <p>No members yet. Be the first to sign up!</p>
-          </div>`;
+        container.innerHTML = `<div class="empty-state"><div class="empty-icon">👥</div><p>No members yet. Be the first to sign up!</p></div>`;
         document.getElementById('signups-count').textContent = '0 members';
         return;
       }
 
-      const members = [...json.data].reverse(); // newest first
+      const members = [...json.data].reverse();
       container.innerHTML = '';
       members.forEach((m, i) => container.appendChild(buildCard(m, i * 60)));
-
       const c = members.length;
       document.getElementById('signups-count').textContent = c + (c === 1 ? ' member' : ' members');
 
     } catch (err) {
-      container.innerHTML = `
-        <div class="empty-state">
-          <div class="empty-icon">⚠️</div>
-          <p>Could not load members. Make sure your Apps Script is redeployed with the new doGet function.</p>
-        </div>`;
-      console.error('Load error:', err);
+      container.innerHTML = `<div class="empty-state"><div class="empty-icon">⚠️</div><p>Could not load members. Please redeploy your Apps Script with the new code.</p></div>`;
+      console.error(err);
     }
   }
 
   // ── Photo preview ──
   const photoInput   = document.getElementById('photo');
   const previewThumb = document.getElementById('preview-thumb');
+
   photoInput.addEventListener('change', () => {
     const file = photoInput.files[0];
-    if (file) {
-      previewThumb.src = URL.createObjectURL(file);
-      previewThumb.style.display = 'block';
-      document.querySelector('.upload-icon').style.display = 'none';
+    if (!file) return;
+
+    // Size check (5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      showToast('Image too large. Max 5MB allowed.', 'error');
+      photoInput.value = '';
+      return;
     }
+
+    const url = URL.createObjectURL(file);
+    previewThumb.src = url;
+    previewThumb.style.display = 'block';
+    document.getElementById('upload-icon').style.display = 'none';
   });
 
-  // ── Submit form ──
+  // ── Form submit ──
   document.getElementById('signup-form').addEventListener('submit', async function(e) {
     e.preventDefault();
 
@@ -563,6 +426,7 @@
     const email   = document.getElementById('email').value.trim();
     const phone   = document.getElementById('phone').value.trim();
     const address = document.getElementById('address').value.trim();
+    const file    = photoInput.files[0];
     const btn     = document.getElementById('submit-btn');
 
     if (!name)  document.getElementById('name').classList.add('is-invalid');
@@ -570,35 +434,54 @@
     if (!name || !email) return;
 
     btn.disabled = true;
-    btn.textContent = 'SAVING…';
-    const loadingToast = showToast('Saving your data…', 'loading', 0);
+    btn.textContent = 'UPLOADING…';
+
+    const progress = document.getElementById('upload-progress');
+    if (file) progress.style.display = 'block';
+
+    const loadingToast = showToast('Saving your registration…', 'loading', 0);
 
     const timestamp = new Date().toLocaleString('en-US', {
-      month:'short', day:'numeric', year:'numeric',
-      hour:'2-digit', minute:'2-digit'
+      month:'short', day:'numeric', year:'numeric', hour:'2-digit', minute:'2-digit'
     });
+
+    // Build payload
+    const payload = { timestamp, name, email, phone, address };
+
+    // If photo selected, convert to base64
+    if (file) {
+      try {
+        payload.imageBase64 = await fileToBase64(file);
+        payload.imageName   = file.name;
+        payload.imageMime   = file.type;
+      } catch (err) {
+        console.warn('Image read failed, skipping photo', err);
+      }
+    }
 
     try {
       await fetch(SHEET_URL, {
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ timestamp, name, email, phone, address })
+        body: JSON.stringify(payload)
       });
 
       loadingToast.remove();
-      showToast('✓ Registered! Card will appear below shortly.', 'success');
+      progress.style.display = 'none';
+      showToast('✓ Registered successfully! Card will appear below.', 'success');
 
       // Reset form
       this.reset();
       previewThumb.style.display = 'none';
-      document.querySelector('.upload-icon').style.display = 'block';
+      document.getElementById('upload-icon').style.display = 'block';
 
-      // Reload cards after short delay (sheet needs time to write)
-      setTimeout(() => loadAllSignups(), 2000);
+      // Wait for sheet + Drive to process, then reload
+      setTimeout(() => loadAllSignups(), 3000);
 
     } catch (err) {
       loadingToast.remove();
+      progress.style.display = 'none';
       showToast('Failed to save. Please try again.', 'error');
       console.error(err);
     }
